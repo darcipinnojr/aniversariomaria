@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Aniversario Maria Luiza - 5 Anos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF6B9D;
+    --pink-light: #FFB8D4;
+    --purple: #C084FC;
+    --purple-deep: #9333EA;
+    --lilac: #E8D5F5;
+    --gold: #FFD700;
+    --gold-warm: #F5C842;
+    --mint: #A7F3D0;
+    --sky: #93C5FD;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(180deg, #FDF2F8 0%, #F3E8FF 30%, #EDE9FE 60%, #FCE7F3 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #4A1942;
+  }
+
+  .confetti-piece {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    animation: confettiFall linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+  }
+
+  .sparkles-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+
+  .sparkle {
+    position: absolute;
+    border-radius: 50%;
+    animation: sparkleRise linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes sparkleRise {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) rotate(720deg) scale(0); opacity: 0; }
+  }
+
+  .star-particle {
+    position: absolute;
+    font-size: 16px;
+    animation: starFloat linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes starFloat {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  .invitation {
+    max-width: 430px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: hidden;
+  }
+
+  .rainbow-arc {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 250px;
+    border-radius: 250px 250px 0 0;
+    background: conic-gradient(from 180deg, #FF6B6B, #FFB347, #FFD700, #98D8A0, #87CEEB, #C084FC, #FF6B9D);
+    opacity: 0.15;
+    animation: rainbowPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes rainbowPulse {
+    0%, 100% { opacity: 0.12; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.2; transform: translateX(-50%) scale(1.05); }
+  }
+
+  .clouds { position: absolute; top: 20px; width: 100%; height: 80px; }
+
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50px;
+    animation: cloudFloat linear infinite;
+  }
+
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+  }
+
+  .cloud:nth-child(1) { width: 100px; height: 35px; top: 10px; animation-duration: 20s; }
+  .cloud:nth-child(1)::before { width: 45px; height: 45px; top: -20px; left: 15px; }
+  .cloud:nth-child(1)::after { width: 35px; height: 35px; top: -12px; right: 15px; }
+
+  .cloud:nth-child(2) { width: 80px; height: 28px; top: 50px; animation-duration: 25s; animation-delay: -8s; }
+  .cloud:nth-child(2)::before { width: 35px; height: 35px; top: -16px; left: 12px; }
+  .cloud:nth-child(2)::after { width: 28px; height: 28px; top: -10px; right: 10px; }
+
+  @keyframes cloudFloat { 0% { left: -150px; } 100% { left: calc(100% + 150px); } }
+
+  .unicorn-big {
+    font-size: 80px;
+    opacity: 0;
+    animation: unicornEnter 1s ease 0.3s both, unicornBounce 2s ease-in-out 1.3s infinite;
+    filter: drop-shadow(0 10px 20px rgba(192,132,252,0.4));
+    margin-bottom: 10px;
+  }
+
+  @keyframes unicornEnter {
+    0% { opacity: 0; transform: scale(0) rotate(-30deg); }
+    60% { transform: scale(1.2) rotate(5deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-5deg); }
+  }
+
+  @keyframes unicornBounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    25% { transform: translateY(-20px) rotate(0deg); }
+    50% { transform: translateY(0) rotate(5deg); }
+    75% { transform: translateY(-10px) rotate(0deg); }
+  }
+
+  .subtitle-top {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s both;
+  }
+
+  .name {
+    font-family: 'Sacramento', cursive;
+    font-size: 58px;
+    background: linear-gradient(135deg, var(--pink), var(--purple-deep), var(--pink));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.8s ease 0.8s both, shimmer 3s linear infinite 1.6s;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+  .age-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-warm));
+    border-radius: 50px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(245,200,66,0.4);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 1s both, badgeGlow 2s ease-in-out infinite 1.8s;
+  }
+
+  @keyframes badgeGlow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(245,200,66,0.4); }
+    50% { box-shadow: 0 4px 30px rgba(245,200,66,0.7); }
+  }
+
+  .avatar-frame {
+    width: 200px; height: 200px;
+    margin: 20px auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--purple), var(--sky), var(--gold));
+    background-size: 300% 300%;
+    animation: fadeInUp 0.8s ease 1.2s both, gradientSpin 4s ease infinite;
+    padding: 5px;
+    box-shadow: 0 8px 30px rgba(192,132,252,0.3);
+    position: relative;
+  }
+
+  @keyframes gradientSpin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+  .avatar-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--lilac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-placeholder { font-size: 60px; }
+
+  .avatar-frame::before, .avatar-frame::after {
+    content: ''; position: absolute; font-size: 22px;
+    animation: orbitStar 5s linear infinite;
+  }
+  .avatar-frame::before { content: '⭐'; }
+  .avatar-frame::after { content: '✨'; animation-delay: -2.5s; }
+
+  @keyframes orbitStar {
+    0% { top: -10px; left: 50%; transform: translateX(-50%); }
+    25% { top: 50%; left: calc(100% + 10px); transform: translateY(-50%); }
+    50% { top: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
+    75% { top: 50%; left: -10px; transform: translateY(-50%); }
+    100% { top: -10px; left: 50%; transform: translateX(-50%); }
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    opacity: 0; animation: fadeInUp 0.8s ease 1.8s both;
+  }
+
+  .scroll-arrow {
+    width: 24px; height: 24px;
+    border-right: 3px solid var(--purple);
+    border-bottom: 3px solid var(--purple);
+    transform: rotate(45deg);
+    animation: scrollBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+    50% { transform: rotate(45deg) translateY(8px); opacity: 0.4; }
+  }
+
+  .scroll-text { font-size: 11px; font-weight: 600; color: var(--purple); letter-spacing: 2px; text-transform: uppercase; }
+
+  .magic-divider { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 15px 0; font-size: 20px; }
+  .magic-divider span { height: 2px; width: 60px; background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+
+  .section { padding: 30px 20px; }
+
+  .info-card {
+    background: rgba(255,255,255,0.7);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-radius: 24px; padding: 28px 24px; margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(192,132,252,0.12);
+    border: 1px solid rgba(192,132,252,0.15);
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative; overflow: hidden;
+  }
+
+  .info-card.visible { opacity: 1; transform: translateY(0); }
+
+  .info-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--sky), var(--gold));
+  }
+
+  .card-icon { font-size: 36px; margin-bottom: 12px; display: block; animation: iconWiggle 3s ease-in-out infinite; }
+
+  @keyframes iconWiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
+
+  .card-label { font-family: 'Baloo 2', cursive; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+  .card-value { font-family: 'Baloo 2', cursive; font-size: 22px; font-weight: 700; color: #4A1942; line-height: 1.3; }
+  .card-detail { font-size: 14px; color: #7C3AED; margin-top: 4px; font-weight: 500; }
+
+  .map-link { color: var(--purple-deep); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+
+  .countdown-section { text-align: center; padding: 30px 20px; }
+  .countdown-title { font-family: 'Baloo 2', cursive; font-size: 18px; color: var(--purple-deep); margin-bottom: 20px; }
+  .countdown { display: flex; justify-content: center; gap: 12px; }
+
+  .countdown-item {
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(243,232,255,0.8));
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-radius: 18px; padding: 14px 8px; min-width: 72px;
+    border: 1px solid rgba(192,132,252,0.2); box-shadow: 0 4px 12px rgba(192,132,252,0.1);
+  }
+
+  .countdown-number {
+    font-family: 'Baloo 2', cursive; font-size: 32px; font-weight: 800;
+    background: linear-gradient(135deg, var(--pink), var(--purple-deep));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+  }
+
+  .countdown-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); margin-top: 4px; }
+
+  .rsvp-section { padding: 30px 20px 50px; text-align: center; }
+
+  .rsvp-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(252,231,243,0.85));
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-radius: 28px; padding: 32px 24px;
+    box-shadow: 0 8px 30px rgba(192,132,252,0.15);
+    border: 1px solid rgba(255,107,157,0.2);
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .rsvp-card.visible { opacity: 1; transform: translateY(0); }
+
+  .rsvp-title { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 700; color: var(--purple-deep); margin-bottom: 6px; }
+  .rsvp-deadline { font-size: 13px; color: var(--pink); font-weight: 600; margin-bottom: 22px; }
+
+  .rsvp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 36px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white; border: none; border-radius: 50px;
+    font-family: 'Baloo 2', cursive; font-size: 18px; font-weight: 700;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+    position: relative; overflow: hidden;
+  }
+
+  .rsvp-btn::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: btnShine 3s ease-in-out infinite;
+  }
+
+  @keyframes btnShine { 0% { transform: translateX(-100%) rotate(45deg); } 50%, 100% { transform: translateX(100%) rotate(45deg); } }
+  .rsvp-btn:active { transform: scale(0.95); }
+  .rsvp-btn svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+  .rsvp-note { margin-top: 18px; font-size: 12px; color: #9CA3AF; font-style: italic; }
+
+  .footer { text-align: center; padding: 20px 20px 40px; font-size: 24px; letter-spacing: 4px; opacity: 0.6; }
+
+  .touch-sparkle { position: fixed; pointer-events: none; font-size: 18px; z-index: 99; animation: touchSparkle 1s ease-out forwards; }
+
+  @keyframes touchSparkle {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    100% { transform: scale(0) rotate(360deg) translateY(-40px); opacity: 0; }
+  }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="sparkles-container" id="sparklesContainer"></div>
+
+<div class="invitation">
+  <section class="hero">
+    <div class="rainbow-arc"></div>
+    <div class="clouds"><div class="cloud"></div><div class="cloud"></div></div>
+    <div class="unicorn-big">🦄</div>
+    <div style="text-align:center">
+      <p class="subtitle-top">Venha festejar comigo!</p>
+      <h1 class="name">Maria Luiza</h1>
+      <div class="age-badge">⭐ Faz 5 Aninhos! ⭐</div>
+    </div>
+    <div class="avatar-frame">
+      <div class="avatar-inner">
+        <span class="avatar-placeholder">👸🏻</span>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-arrow"></div>
+      <span class="scroll-text">Deslize</span>
+    </div>
+  </section>
+
+  <div class="magic-divider"><span></span> 🌈 <span></span></div>
+
+  <section class="section">
+    <div class="info-card" data-anim>
+      <span class="card-icon">📅</span>
+      <p class="card-label">Quando</p>
+      <p class="card-value">09 de Abril de 2026</p>
+      <p class="card-detail">Quinta-feira</p>
+    </div>
+    <div class="info-card" data-anim>
+      <span class="card-icon">🕐</span>
+      <p class="card-label">Horário</p>
+      <p class="card-value">A partir das 19h</p>
+      <p class="card-detail">Venha se divertir! ✨</p>
+    </div>
+    <div class="info-card" data-anim>
+      <span class="card-icon">📍</span>
+      <p class="card-label">Local</p>
+      <p class="card-value">Casa do Brincar Tia Hanna</p>
+      <p class="card-detail" style="margin-top:10px">
+        <a class="map-link" href="https://www.google.com/maps/search/Casa+do+Brincar+Tia+Hanna+Cuiab%C3%A1" target="_blank" rel="noopener">🗺️ Ver no mapa</a>
+      </p>
+    </div>
+    <div class="info-card" data-anim>
+      <span class="card-icon">🦄</span>
+      <p class="card-label">Tema</p>
+      <p class="card-value">Unicórnio 🌈✨</p>
+      <p class="card-detail">Venha com roupas coloridas!</p>
+    </div>
+  </section>
+
+  <div class="magic-divider"><span></span> ✨ <span></span></div>
+
+  <section class="countdown-section">
+    <p class="countdown-title">🎉 Faltam para a festa:</p>
+    <div class="countdown">
+      <div class="countdown-item"><div class="countdown-number" id="days">--</div><div class="countdown-label">Dias</div></div>
+      <div class="countdown-item"><div class="countdown-number" id="hours">--</div><div class="countdown-label">Horas</div></div>
+      <div class="countdown-item"><div class="countdown-number" id="minutes">--</div><div class="countdown-label">Min</div></div>
+      <div class="countdown-item"><div class="countdown-number" id="seconds">--</div><div class="countdown-label">Seg</div></div>
+    </div>
+  </section>
+
+  <div class="magic-divider"><span></span> 💖 <span></span></div>
+
+  <section class="rsvp-section">
+    <div class="rsvp-card" data-anim>
+      <p class="rsvp-title">Confirme sua presença!</p>
+      <p class="rsvp-deadline">⏰ Até o dia 03/04/2026</p>
+      <a class="rsvp-btn" href="https://wa.me/5565998070838?text=Ol%C3%A1!%20Confirmo%20presen%C3%A7a%20no%20anivers%C3%A1rio%20da%20Maria%20Luiza!%20%F0%9F%A6%84%F0%9F%8E%89" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirmar via WhatsApp
+      </a>
+      <p class="rsvp-note">🦄 Será mágico ter você lá! 🌈</p>
+    </div>
+  </section>
+
+  <div class="footer">🦄 🌈 ⭐ ✨ 💖</div>
+</div>
+
+<script>
+  // Confetti on load
+  (function() {
+    var emojis = ['🦄','⭐','✨','💖','🌈','💫','🎉','🎀','💜','🩷'];
+    for (var i = 0; i < 30; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          var el = document.createElement('div');
+          el.className = 'confetti-piece';
+          el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          el.style.left = Math.random() * 100 + 'vw';
+          el.style.top = '-20px';
+          el.style.fontSize = (14 + Math.random() * 20) + 'px';
+          el.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+          document.body.appendChild(el);
+          setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 6000);
+        }, 300 + idx * 80);
+      })(i);
+    }
+  })();
+
+  // Sparkles
+  (function() {
+    var container = document.getElementById('sparklesContainer');
+    var colors = ['#FF6B9D','#C084FC','#FFD700','#93C5FD','#A7F3D0','#FF6B6B','#FFB347'];
+    var symbols = ['✨','⭐','💫','🌟'];
+    setInterval(function() {
+      var s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = Math.random() * 100 + '%';
+      var sz = (4 + Math.random() * 8) + 'px';
+      s.style.width = sz; s.style.height = sz;
+      s.style.background = colors[Math.floor(Math.random() * colors.length)];
+      s.style.animationDuration = (4 + Math.random() * 6) + 's';
+      s.style.animationDelay = Math.random() * 2 + 's';
+      container.appendChild(s);
+      setTimeout(function() { if (s.parentNode) s.parentNode.removeChild(s); }, 12000);
+      if (Math.random() > 0.5) {
+        var st = document.createElement('div');
+        st.className = 'star-particle';
+        st.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        st.style.left = Math.random() * 100 + '%';
+        st.style.animationDuration = (5 + Math.random() * 7) + 's';
+        st.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(st);
+        setTimeout(function() { if (st.parentNode) st.parentNode.removeChild(st); }, 14000);
+      }
+    }, 700);
+  })();
+
+  // Touch sparkles
+  document.addEventListener('touchstart', function(e) {
+    var sp = ['✨','⭐','🦄','💖','🌈','💫'];
+    var t = e.touches[0];
+    for (var i = 0; i < 3; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          var el = document.createElement('div');
+          el.className = 'touch-sparkle';
+          el.textContent = sp[Math.floor(Math.random() * sp.length)];
+          el.style.left = (t.clientX + (Math.random()-0.5)*40) + 'px';
+          el.style.top = (t.clientY + (Math.random()-0.5)*40) + 'px';
+          document.body.appendChild(el);
+          setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 1000);
+        }, idx * 80);
+      })(i);
+    }
+  }, { passive: true });
+
+  // Scroll animations
+  (function() {
+    var cards = document.querySelectorAll('[data-anim]');
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) entries[i].target.classList.add('visible');
+        }
+      }, { threshold: 0.15 });
+      for (var i = 0; i < cards.length; i++) obs.observe(cards[i]);
+    } else {
+      for (var i = 0; i < cards.length; i++) cards[i].classList.add('visible');
+    }
+  })();
+
+  // Countdown
+  function updateCountdown() {
+    var target = new Date('2026-04-09T19:00:00-04:00');
+    var now = new Date();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('days').textContent = '🎉';
+      document.getElementById('hours').textContent = '🎉';
+      document.getElementById('minutes').textContent = '🎉';
+      document.getElementById('seconds').textContent = '🎉';
+      return;
+    }
+    var d = Math.floor(diff/(1000*60*60*24));
+    var h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    var m = Math.floor((diff%(1000*60*60))/(1000*60));
+    var s = Math.floor((diff%(1000*60))/1000);
+    document.getElementById('days').textContent = d < 10 ? '0'+d : d;
+    document.getElementById('hours').textContent = h < 10 ? '0'+h : h;
+    document.getElementById('minutes').textContent = m < 10 ? '0'+m : m;
+    document.getElementById('seconds').textContent = s < 10 ? '0'+s : s;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
